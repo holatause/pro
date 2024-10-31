@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predis SDK Post Creation</title>
+    <script
+        type="text/javascript"
+        src="https://predis.ai/sdk/embed.js"
+        async
+        defer
+        crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+    <h1>Crear un Post con Predis SDK</h1>
+    <p>Este ejemplo muestra cómo crear un post utilizando el SDK de Predis.</p>
+    
+    <div id="predis-container"></div>
+    
+    <button id="createPostButton">Crear Post</button>
+
+    <script>
+        window.predisInit = function() {
+            const predis = new PredisSDK({
+                projectId: "YourProjectId", // Reemplaza con tu ID de proyecto
+                containerSelector: "#predis-container"
+            });
+
+            // Función para crear un post
+            function createPost() {
+                const postContent = {
+                    title: "Mi Primer Post",
+                    body: "Este es el contenido de mi primer post.",
+                    // Agrega otros parámetros según sea necesario
+                };
+
+                predis.createPost(postContent)
+                    .then(response => {
+                        console.log("Post creado exitosamente:", response);
+                        alert("Post creado exitosamente!");
+                    })
+                    .catch(error => {
+                        console.error("Error al crear el post:", error);
+                        alert("Error al crear el post. Revisa la consola para más detalles.");
+                    });
+            }
+
+            // Agregar evento al botón para crear el post
+            document.getElementById("createPostButton").addEventListener("click", createPost);
+        }
+    </script>
+</body>
+</html>
